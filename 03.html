@@ -1,0 +1,265 @@
+<HTML><HEAD><TITLE>人民币大写在线转换工具</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="人民币大写在线转换工具" name=Description>
+<META content="人民币大写在线转换工具 在线将阿拉伯数字转换成中文大写工具 人民币大写转换工具" name=Keywords>
+<style type="text/css">
+<!--
+.STYLE2 {font-family: "新宋体"}
+.STYLE3 {font-family: "宋体"}
+.STYLE7 {font-family: Arial, Helvetica, sans-serif}
+-->
+</style>
+<div align="center">
+
+
+<p>　</p>
+<SCRIPT language=jscript> 
+function convertCurrency(currencyDigits) { 
+// Constants: 
+    var MAXIMUM_NUMBER = 99999999999.99; 
+    // Predefine the radix characters and currency symbols for output: 
+    var CN_ZERO = "零"; 
+    var CN_ONE = "壹"; 
+    var CN_TWO = "贰"; 
+    var CN_THREE = "叁"; 
+    var CN_FOUR = "肆"; 
+    var CN_FIVE = "伍"; 
+    var CN_SIX = "陆"; 
+    var CN_SEVEN = "柒"; 
+    var CN_EIGHT = "捌"; 
+    var CN_NINE = "玖"; 
+    var CN_TEN = "拾"; 
+    var CN_HUNDRED = "佰"; 
+    var CN_THOUSAND = "仟"; 
+    var CN_TEN_THOUSAND = "万"; 
+    var CN_HUNDRED_MILLION = "亿"; 
+    var CN_SYMBOL = ""; 
+    var CN_DOLLAR = "元"; 
+    var CN_TEN_CENT = "角"; 
+    var CN_CENT = "分"; 
+    var CN_INTEGER = "整"; 
+     
+
+// Variables: 
+    var integral;    // Represent integral part of digit number. 
+    var decimal;    // Represent decimal part of digit number. 
+    var outputCharacters;    // The output result. 
+    var parts; 
+    var digits, radices, bigRadices, decimals; 
+    var zeroCount; 
+    var i, p, d; 
+    var quotient, modulus; 
+     
+// Validate input string: 
+    currencyDigits = currencyDigits.toString(); 
+    if (currencyDigits == "") { 
+        alert("Empty input!"); 
+        return ""; 
+    } 
+    if (currencyDigits.match(/[^,.\d]/) != null) { 
+        alert("Invalid characters in the input string!"); 
+        return ""; 
+    } 
+    if ((currencyDigits).match(/^((\d{1,3}(,\d{3})*(.((\d{3},)*\d{1,3}))?)|(\d+(.\d+)?))$/) == null) { 
+        alert("Illegal format of digit number!"); 
+        return ""; 
+    } 
+     
+// Normalize the format of input digits: 
+    currencyDigits = currencyDigits.replace(/,/g, "");    // Remove comma delimiters. 
+    currencyDigits = currencyDigits.replace(/^0+/, "");    // Trim zeros at the beginning. 
+    // Assert the number is not greater than the maximum number. 
+    if (Number(currencyDigits) > MAXIMUM_NUMBER) { 
+        alert("Too large a number to convert!"); 
+        return ""; 
+    } 
+     
+// Process the coversion from currency digits to characters: 
+    // Separate integral and decimal parts before processing coversion: 
+    parts = currencyDigits.split("."); 
+    if (parts.length > 1) { 
+        integral = parts[0]; 
+        decimal = parts[1]; 
+        // Cut down redundant decimal digits that are after the second. 
+        decimal = decimal.substr(0, 2); 
+    } 
+    else { 
+        integral = parts[0]; 
+        decimal = ""; 
+    } 
+    // Prepare the characters corresponding to the digits: 
+    digits = new Array(CN_ZERO, CN_ONE, CN_TWO, CN_THREE, CN_FOUR, CN_FIVE, CN_SIX, CN_SEVEN, CN_EIGHT, CN_NINE); 
+    radices = new Array("", CN_TEN, CN_HUNDRED, CN_THOUSAND); 
+    bigRadices = new Array("", CN_TEN_THOUSAND, CN_HUNDRED_MILLION); 
+    decimals = new Array(CN_TEN_CENT, CN_CENT); 
+    // Start processing: 
+    outputCharacters = ""; 
+    // Process integral part if it is larger than 0: 
+    if (Number(integral) > 0) { 
+        zeroCount = 0; 
+        for (i = 0; i < integral.length; i++) { 
+            p = integral.length - i - 1; 
+            d = integral.substr(i, 1); 
+            quotient = p / 4; 
+            modulus = p % 4; 
+            if (d == "0") { 
+                zeroCount++; 
+            } 
+            else { 
+                if (zeroCount > 0) 
+                { 
+                    outputCharacters += digits[0]; 
+                } 
+                zeroCount = 0; 
+                outputCharacters += digits[Number(d)] + radices[modulus]; 
+            } 
+            if (modulus == 0 && zeroCount < 4) { 
+                outputCharacters += bigRadices[quotient]; 
+            } 
+        } 
+        outputCharacters += CN_DOLLAR; 
+    } 
+    // Process decimal part if there is: 
+    if (decimal != "") { 
+        for (i = 0; i < decimal.length; i++) { 
+            d = decimal.substr(i, 1); 
+            if (d != "0") { 
+                outputCharacters += digits[Number(d)] + decimals[i]; 
+            } 
+        } 
+    } 
+    // Confirm and return the final output string: 
+    if (outputCharacters == "") { 
+        outputCharacters = CN_ZERO + CN_DOLLAR; 
+    } 
+    if (decimal == "") { 
+        outputCharacters += CN_INTEGER; 
+    } 
+    outputCharacters = CN_SYMBOL + outputCharacters; 
+    return outputCharacters; 
+} 
+        </SCRIPT>
+
+<META content="MSHTML 6.00.2800.1627" name=GENERATOR>
+<style type="text/css">
+<!--
+.STYLE2 {font-size: 12px}
+.STYLE3 {
+	font-size: 16px;
+	font-weight: bold;
+	color: #000000;
+}
+.STYLE8 {font-size: 14px}
+.STYLE9 {font-size: 14px; font-weight: bold; }
+.STYLE11 {font-size: 16px; font-weight: bold; color: #FFFFFF; }
+.STYLE12 {color: #FFFFFF; font-size: 16px;}
+body {
+	margin-top: 50px;
+}
+-->
+</style>
+</HEAD>
+<BODY leftMargin=0 marginwidth="0">
+<CENTER>
+
+<TABLE width=900 border=0 cellPadding=0 cellSpacing=0 bordercolor="#6699FF" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD bgColor=#ffffff height=1></TD></TR>
+  <TR>
+    <th class=navhead2 bgColor=#66CCFF height=30><h1 align="center"><span class="STYLE11">人民币大写在线转换器</span></h1></th>
+  </TR>
+  <TR>
+    <TD bgColor=#00AEEF height=5></TD>
+  </TR>
+  <TR>
+    <TD height=20></TD>
+  </TR></TBODY></TABLE><!-- navigation end here--><!-- main table -->
+  <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="118" align="center" valign="middle"><script type="text/javascript">
+    /*120*240，创建于2010-8-12*/
+    var cpro_id = "u147694";
+</script>
+
+</td>
+    <td width="679"><TABLE width=660 height="317" border=1 align="center" cellPadding=0 cellSpacing=0 bordercolor="#00AEEF" bgColor=#ffffff>
+      <TBODY>
+        <TR>
+          <!-- leftnav starts-->
+          <!-- left nav ends -->
+          <!-- gutter space -->
+          <TD width=660 height="315" align="center" vAlign=middle bgColor=#E1F4FD><!-- heading -->
+              <table width="660" height="192" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td><table width="100%" height="50" border="0" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td><span class="STYLE3">人民币大写在线转换工具</span></td>
+                      </tr>
+                      <tr>
+                        <td height="29" class="STYLE8">在线将阿拉伯数字转换成中文大写、人民币大写转换工具</td>
+                      </tr>
+                  </table></td>
+                </tr>
+                <tr>
+                  <td><table width="100%" height="198" border="0" align="center" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td width="32%" height="55" align="center" valign="middle"><span class="STYLE9">小写数字输入：</span></td>
+                        <td width="68%" align="left" valign="middle"><input name=Digits id=Digits size="40">
+                          <INPUT id=Convert onClick="Result.value = convertCurrency(Digits.value);" type=button value=转　换 name=Convert></td>
+                      </tr>
+                      <tr>
+                        <td height="45" align="center" valign="middle"><span class="STYLE9">中文大写显示：</span></td>
+                        <td height="45" align="left" valign="middle"><input id=Result size=50 name=Result></td>
+                      </tr>
+                      <tr>
+                        <td height="21" colspan="2" align="center" valign="middle" class="STYLE2"><table width="500" border="0" align="center" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td align="center" class="STYLE2">1=壹</td>
+                              <td align="center" class="STYLE2">2=贰</td>
+                              <td align="center" class="STYLE2">3=叁</td>
+                              <td align="center" class="STYLE2">4=肆</td>
+                              <td align="center" class="STYLE2">5=伍</td>
+                              <td align="center" class="STYLE2">6=陆</td>
+                              <td align="center" class="STYLE2">7=柒</td>
+                              <td align="center" class="STYLE2">8=捌</td>
+                              <td align="center" class="STYLE2">9=玖</td>
+                              <td align="center" class="STYLE2">10=拾</td>
+                            </tr>
+                        </table></td>
+                      </tr>
+                      <tr>
+                        <td height="15" colspan="2" align="center" valign="middle" class="STYLE2">亿 万 仟 佰 拾  元 整 </td>
+                      </tr>
+                      <tr>
+                        <td height="40" colspan="2" align="left" valign="middle"><!--zw-->
+                            <div align="left"><span class="STYLE7">说明：将阿拉伯数字复制粘贴或输入到“小写数字输入框”中，比如（123456），然后单击“转换”。就会在“中文大写显示”框中显示自动转换完成的中文大写内容。最后复制转换完成的内容到想到的地方粘贴即可。</span></div></td>
+                      </tr>
+                  </table></td>
+                </tr>
+            </table></TD>
+          <!-- gutter space -->
+          <!-- rightnav starts-->
+        </TR>
+      </TBODY>
+    </TABLE></td>
+    <td width="103"><script type="text/javascript">
+   
+    var cpro_id = "u147694";
+</script>
+
+</td>
+  </tr>
+</table>
+<TABLE cellSpacing=0 cellPadding=0 width=900 bgColor=#CCCCCC border=0>
+  <TBODY>
+  <TR>
+    <TD bgColor=#ffffff height=20></TD>
+  </TR>
+  <TR>
+    <TD width="64%" height=100 align=center bgcolor="#f2f2f2"></TD>
+    </TR>
+  <TR>
+
+  </TR></TBODY></TABLE>
+</CENTER></BODY></HTML>

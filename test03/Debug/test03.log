@@ -1,0 +1,5 @@
+﻿  Average.cpp
+d:\2021 semester1\coding\test03\test03\average.h(4): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+d:\2021 semester1\coding\test03\test03\average.cpp(10): warning C4018: “<”: 有符号/无符号不匹配
+d:\2021 semester1\coding\test03\test03\average.cpp(21): warning C4018: “<”: 有符号/无符号不匹配
+  test03.vcxproj -> D:\2021 semester1\Coding\test03\Debug\test03.exe

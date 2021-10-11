@@ -1,0 +1,37 @@
+h1 {
+
+   margin-top: 40px;
+   margin-bottom: 30px;
+   text-align: center;
+   padding: 30px 30px;
+   background-color:white;
+   color: #4169E1;
+   font-family:ºÚÌå;
+   font-size:60px;
+   font-weight: normal;
+  
+}
+ 
+
+.button {
+
+       background-corlor:
+       color: black;
+       padding: 15px 20px;
+       text-align: center;
+	   font-family:ºÚÌå;
+       font-size: 27px;
+       cursor: pointer;	   
+	   border-bottom-width:thin;	   
+	   margin-bottom:18px;
+	   
+	   -webkit-transition-duration: 0.4s; /* Safari */
+       transition-duration: 0.4s;
+	   
+
+   }
+   
+.button:hover {
+    background-color:#20B2AA; /* Green */
+    color: white;
+}

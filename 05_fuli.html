@@ -1,0 +1,344 @@
+<!doctype html>
+<html>
+<head>
+<meta charset=utf-8">
+<title>利息利率在线计算器（单利）</title>
+
+<script language=javascript>
+function fixed(s,n){var str=s+" ";var pat=/e/i;var res=str.match(pat);if(res=="e"||res=="E"){return s;}
+s=1*s;var s_ori=s;var flag=0;if(s<0){s=-1*s;flag=1;}
+var val=Math.pow(0.1,n);if(s<10*val){return s_ori;}
+if(str.length>(n+1)){s=s.toFixed(n);s=s.replace(/0+$/,"");s=s.replace(/\.$/,"");}
+if(flag==1){s=-1*s;}return s;}
+function lfixsci(s,n)
+{var tp=s;var tpStr=new String(tp);if((tpStr.indexOf('E')!=-1)||(tpStr.indexOf('e')!=-1)){var regExp=/^(\d+.\d+)[Ee]([\+\-]?\d+)$/;var result=regExp.exec(tp);var num="";var power="";if(result!=null){num=result[1];power=result[2];var res=fixed(num,n);if(res==10){res=1;power=1*power+1;power="+"+power;}
+res+="e";res+=power;return res;}
+else{return s;}}
+else{return s;}}
+function lfixed(s,n){var str=s+" ";var pat=/e/i;var res=str.match(pat);if(res=="e"||res=="E"){s=lfixsci(s,n);return s;}
+s=1*s;var s_ori=s;var flag=0;if(s<0){s=-1*s;flag=1;}
+if(str.length>(n+1)){s=s.toFixed(n);s=s.replace(/0+$/,"");s=s.replace(/\.$/,"");}
+if(flag==1){s=-1*s;}return s;}
+function lfix(s){var s_ori=s;if(s<0)s=-1*s;var tpStr=new String(s);if((tpStr.indexOf('E')!=-1)||(tpStr.indexOf('e')!=-1)){s=lfixsci(s,6);return s;}
+s=1*s;if(s>100000000){s=s.toExponential(8);s=lfixsci(s,6);return s;}
+if(s>0.1){s=lfixed(s,6);}
+else if(s>0.01){s=lfixed(s,8);}
+else if(s<0.01&&s>0.0001){s=lfixed(s,10);}
+else if(s<0.0001&&s>0.000001){s=lfixed(s,12);}
+else if(s<0.000001&&s>0.00000001){s=lfixed(s,14);}
+else if(s<0.00000001&&s>0.0000000001){s=lfixed(s,16);}
+else if(s<0.0000000001&&s>0.000000000001){s=lfixed(s,18);}
+else if(s<0.000000000001&&s>0.00000000000001){s=lfixed(s,20);}
+else if(s<0.00000000000001&&s>0.0000000000000001){s=lfixed(s,22);}
+else if(s<0.0000000000000001&&s>0.000000000000000001){s=lfixed(s,24);}
+else if(s<0.000000000000000001&&s>0.00000000000000000001){s=lfixed(s,26);}
+else if(s<0.00000000000000000001&&s>0.0000000000000000000001){s=lfixed(s,28);}
+else if(s<0.0000000000000000000001&&s>0.000000000000000000000001){s=lfixed(s,30);}
+if(s_ori<0)s=-1*s;return s;}
+function afocus(a){}
+</SCRIPT>
+
+<script language=javascript>
+function clearsquare()
+{
+   document.square.wid.value = "";
+   document.square.len.value = "";
+   document.square.area.value = "";
+   document.square.perimeter.value = "";
+   document.square.diagonal.value = "";
+
+   document.square.perimeter.style.backgroundColor = '';				  		  		  		  
+   document.square.wid.style.backgroundColor = '';				  		  		  		  
+   document.square.len.style.backgroundColor = '';				  		  		  		  
+   document.square.area.style.backgroundColor = '';				  		  		  		  
+   document.square.diagonal.style.backgroundColor = '';	
+
+   document.square.wid.focus();   
+}
+
+function isNum(args)
+{
+	args = args.toString();
+
+	if (args.length == 0)
+	return false;//有没有没输入
+
+	for (var i = 0;  i<args.length;  i++)
+	{
+		if ((args.substring(i,i+1) < "0" || args.substring(i, i+1) > "9") && args.substring(i, i+1) != ".")
+		{
+			return false;
+		}
+	}
+
+	return true;
+}//输入的是对的
+function squarecal(p)
+{
+   var wid = document.square.wid.value;
+   var len = document.square.len.value;
+   var area = document.square.area.value;
+   var perimeter = document.square.perimeter.value;
+   var diagonal = document.square.diagonal.value;
+
+ 	if (p == "1")
+	{
+	      if (!isNum(wid))
+		  {
+			  wid = wid.substring(0,wid.length-1);
+			  document.square.wid.value = wid;
+		  }
+		  else
+		  {
+		      document.square.wid.style.backgroundColor = '#cccccc';				  
+		  }
+		  return;	   
+	}
+ 	if (p == "2")
+	{
+	      if (!isNum(len))
+		  {
+			  len = len.substring(0,len.length-1);
+			  document.square.len.value = len;
+		  }
+		  else
+		  {
+		      document.square.len.style.backgroundColor = '#cccccc';				  		  
+		  }
+		  return;	   
+	}
+ 	if (p == "3")
+	{
+	      if (!isNum(area))
+		  {
+			  area = area.substring(0,area.length-1);
+			  document.square.area.value = area;
+		  }
+		  else
+		  {
+		      document.square.area.style.backgroundColor = '#cccccc';				  		  		  
+		  }
+		  return;	   
+	}
+ 	if (p == "4")
+	{
+	      if (!isNum(perimeter))
+		  {
+			  perimeter = perimeter.substring(0,perimeter.length-1);
+			  document.square.perimeter.value = perimeter;
+		  }
+		  else
+		  {
+		      document.square.perimeter.style.backgroundColor = '#cccccc';				  		  		  		  
+		  }
+		  return;	   
+	}
+ 	if (p == "5")
+	{
+	      if (!isNum(diagonal))
+		  {
+			  diagonal = diagonal.substring(0,diagonal.length-1);
+			  document.square.diagonal.value = diagonal;
+		  }
+		  else
+		  {
+		      document.square.diagonal.style.backgroundColor = '#cccccc';				  		  		  
+		  }
+		  return;	   
+	}
+}
+
+function squareblur(p)
+{
+   //alert("good");
+   var wid = document.square.wid.value;
+   var len = document.square.len.value;
+   var area = document.square.area.value;
+   var perimeter = document.square.perimeter.value;
+   var diagonal = document.square.diagonal.value;
+
+    
+//alert("good");
+if (isNum(wid)&&isNum(len)&&isNum(area))
+		{
+			diagonal = Math.round(wid*(Math.pow((1+len/100),area))*100)/100;
+			perimeter=diagonal-wid;
+}
+
+	
+	wid = fixed(wid,1);
+	len = fixed(len,1);
+	area = fixed(area,1);
+	perimeter = fixed(perimeter,4);
+	diagonal = fixed(diagonal,4);
+	
+	document.square.wid.value   = wid;	
+	document.square.len.value	= len;
+	document.square.area.value	= area;
+	document.square.perimeter.value	= perimeter;
+	document.square.diagonal.value	= diagonal;	
+}
+
+function calcs()
+{
+   var wid = document.square.wid.value;
+   var len = document.square.len.value;
+   var area = document.square.area.value;
+   var perimeter = document.square.perimeter.value;
+   var diagonal = document.square.diagonal.value;
+
+    var flag=0;
+	if (isNum(wid))
+	{
+	   flag++;
+	   wid = wid * 1;
+	}
+	if (isNum(len))
+	{
+	   flag++;
+	   len = len * 1;
+	} 
+	if (isNum(area))
+	{
+	   flag++;
+	   area = area * 1;
+	} 
+	if (isNum(perimeter))
+	{
+	   flag++;
+	   perimeter = perimeter * 1;
+	} 
+	if (isNum(diagonal))
+	{
+	   flag++;
+	   diagonal = diagonal * 1;
+	}   
+	if (flag < 3) return;
+
+	if (isNum(wid)) {squareblur(1);}
+	else if (isNum(len)) {squareblur(2);}
+	else if (isNum(area)) {squareblur(3);}
+	else if (isNum(perimeter)) {squareblur(4);}
+	else if (isNum(diagonal)) {squareblur(5);}
+}
+
+
+
+</script>
+</head>
+<body>
+
+	<div class="cont">
+	<div style="text-align:center">
+		<div class="col_left">
+		<div class="fn_part fn_sfz mod_box_t1">
+		  <div class="hd">
+            <h2>利息利率在线计算器（复利）&nbsp;</h2>
+	      </div>
+		  <div class="bd">
+		<div class="mod_box_t3 fn_box">
+		<div class="box_con">
+		<div class="mathmod_form">
+		<form name="square">
+		
+<table>
+<tbody>
+<tr>
+<td align="right">
+本金：
+</td>
+<td></td>
+<td>
+<input name="wid" class="nbox" type="text" onBlur="squareblur(1)" onKeyUp="squarecal(1)">
+</td>
+</tr>
+<tr>
+<td align="right">
+利率：
+</td>
+<td></td>
+<td>
+<input name="len" class="nbox" type="text" onBlur="squareblur(2)" onKeyUp="squarecal(2)">
+</td>
+</tr>
+<tr>
+<td align="right">
+期限：
+</td>
+<td></td>
+<td>
+<input name="area" class="nbox" type="text" onBlur="squareblur(3)" onKeyUp="squarecal(3)">
+</td>
+</tr>
+<tr>
+<td align="right">
+利息：
+</td>
+<td></td>
+<td>
+<input name="perimeter" class="nbox" type="text" onBlur="squareblur(4)" onKeyUp="squarecal(4)">
+</td>
+</tr>
+<tr height="4"></tr>
+<tr>
+<td align="right">
+本利和：
+</td>
+<td></td>
+<td>
+<input name="diagonal" class="nbox" type="text" onBlur="squareblur(5)" onKeyUp="squarecal(5)">
+</td>
+</tr>
+<tr height="10"></tr>
+<tr>
+<td width="200"></td>
+<td></td>
+<td>
+<input onClick="calcs()" type="button" name="Calculate" value="计算">
+<input onClick="clearsquare()" type="reset" name="reset" value="清除">
+</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="3"><b>说明：</b>输入前三个值得到后两个结果。</td>
+</tr>
+</tbody>
+</table>
+</form>
+</div>
+</div>
+<i class="flag_tl_t3"></i>
+<i class="flag_tr_t3"></i>
+<i class="flag_bl_t3"></i>
+<i class="flag_br_t3"></i>
+
+
+<i class="flag_tl_t1"></i>
+<i class="flag_tr_t1"></i>
+<i class="flag_bl_t1"></i>
+<i class="flag_br_t1"></i>
+</div>
+</div>
+<div id="col_right" class="col_right">
+
+<div class="side_banner"> </div>
+
+
+
+
+<div class="side_banner">
+
+<div style="background-color:#eeeeee;" id="cpro_u1239045">
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+</div></body>
+</html>
